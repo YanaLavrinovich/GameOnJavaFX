@@ -10,8 +10,8 @@ public class Player {
     private final static int MAX_AMOUNT_LIVES = 3;
 
     public Player(String name) {
-        this.i = 0;
-        this.j = 0;
+        this.i = 1;
+        this.j = 1;
         this.name = name;
         this.time = 0;
         this.live = MAX_AMOUNT_LIVES;

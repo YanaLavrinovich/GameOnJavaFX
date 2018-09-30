@@ -1,14 +1,32 @@
 package sample.model;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+
 public class World {
     private Player player;
     private Field field;
+    private List<Bomb> bombs;
 
     public World(String nameHero) {
         player = new Player(nameHero);
+        bombs = new ArrayList<>();
         field = new Field();
         field.addFirstLevel();
-        field.repaint();
+        Timeline timeline = new Timeline(
+                new KeyFrame(
+                        Duration.seconds(1),
+                        ae -> {
+                            checkStatusBomb();}
+                )
+        );
+        timeline.setCycleCount(-1);
+        timeline.play();
     }
 
     private void findHero(Player player) {
@@ -93,6 +111,18 @@ public class World {
 
     public void putBomb() {
         field.getField()[player.getI()][player.getJ()] = Entity.BOMB.getCode();
+        bombs.add(new Bomb(player.getI(),player.getJ()));
+    }
+
+    public void checkStatusBomb() {
+        for(int i = 0; i < bombs.size(); i++) {
+            Bomb bomb = bombs.get(i);
+            if(!bomb.isAlive()) {
+                field.getField()[bomb.getI()][bomb.getJ()] = Entity.FIRE.getCode();
+                //добавить, чтобы огонь распространялся в другие стороны
+                bombs.remove(bomb);
+            }
+        }
     }
 
     public Field getField() {

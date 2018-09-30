@@ -1,8 +1,9 @@
 package sample.model;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 
 public class Field {
     private int[][] field;
@@ -16,6 +17,15 @@ public class Field {
     public Field() {
         pane = new GridPane();
         field = new int[HIGH][WEIGHT];
+        Timeline timeline = new Timeline(
+                new KeyFrame(
+                        Duration.seconds(1),
+                        ae -> {
+                            repaint();}
+                )
+        );
+        timeline.setCycleCount(-1);
+        timeline.play();
     }
 
     public GridPane getPane() {

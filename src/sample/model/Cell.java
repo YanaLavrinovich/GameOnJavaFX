@@ -22,6 +22,12 @@ public class Cell {
         if(code == Entity.BOMB.getCode()) {
             rectangle = new Rectangle(20,20,Color.BLACK);
         }
+        if(code == Entity.KEY.getCode()) {
+            rectangle = new Rectangle(20,20,Color.BROWN);
+        }
+        if(code == Entity.FIRE.getCode()) {
+            rectangle = new Rectangle(20,20,Color.RED);
+        }
     }
 
     public Rectangle getRectangle() {
