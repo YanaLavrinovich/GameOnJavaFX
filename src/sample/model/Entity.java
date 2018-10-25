@@ -6,8 +6,10 @@ public enum Entity {
     INDESTRUCTIBLE_BLOCK(2),
     DESTRUCTIBLE_BLOCK(3),
     BOMB(4),
-    KEY(5),
-    FIRE(6);
+    KEY_CLOSE(5),
+    FIRE(6),
+    KEY_OPEN(7),
+    BOT(8);
 
     private int code;
 

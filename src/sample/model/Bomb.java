@@ -9,7 +9,7 @@ import javafx.util.Duration;
 
 public class Bomb {
     //добавляем таймер при установке бомбы
-    //спустя три сееунды, она взрывается на три клеточки в разные стороны
+    //спустя три секунды, она взрывается на три клеточки в разные стороны
     //после чего исезает и умирает
     private BooleanProperty isAlive;
     private int i;
@@ -20,13 +20,13 @@ public class Bomb {
         this.i = i;
         this.j = j;
         isAlive = new SimpleBooleanProperty(true);
-        isAlive.addListener((observable, oldValue, newValue) -> System.out.println("changed " + oldValue + "->" + newValue));
         Timeline timeline = new Timeline(
-          new KeyFrame(
-                  Duration.seconds(2),
-                  ae -> {
-                  isAlive.set(false);}
-          )
+                new KeyFrame(
+                        Duration.seconds(2),
+                        ae -> {
+                            isAlive.set(false);
+                        }
+                )
         );
         timeline.setCycleCount(1);
         timeline.play();

@@ -22,7 +22,7 @@ public class StartWindow {
     private final static String PLAY = "Play";
     private final static String TOP = "Top";
     private final static String EXIT = "Exit";
-    private final static String NAME_GAME = "name"; //don't forget to add NORMAL NAME!
+    private final static String NAME_GAME = "Bomberman"; //don't forget to add NORMAL NAME!
 
     public StartWindow(Controller controller) {
         this.controller = controller;
@@ -36,20 +36,25 @@ public class StartWindow {
     public void createWindow() {
         Label nameGame = new Label(NAME_GAME);
         nameGame.setFont(Font.font(25));
-        playButton.setMinSize(100,50);
-        topButton.setMinSize(100,50);
-        exitButton.setMinSize(100,50);
+        playButton.setMinSize(100, 50);
+        topButton.setMinSize(100, 50);
+        exitButton.setMinSize(100, 50);
 
         pane.getChildren().addAll(nameGame, playButton, topButton, exitButton);
         pane.setSpacing(20);
-        pane.setPadding(new Insets(10,10,10,55));
+        pane.setPadding(new Insets(10, 10, 10, 55));
         Scene scene = new Scene(new Group(), 220, 300);
         ((Group) scene.getRoot()).getChildren().addAll(pane);
 
         playButton.setOnAction(e -> {
             controller.showPlayerWindow();
         });
-
+        exitButton.setOnAction(e -> {
+            primaryStage.close();
+        });
+        topButton.setOnAction(e -> {
+            controller.startTopWindow();
+        });
         primaryStage.setScene(scene);
         primaryStage.setTitle(NAME_GAME);
     }

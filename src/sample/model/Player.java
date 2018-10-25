@@ -1,9 +1,10 @@
 package sample.model;
 
-public class Player {
+
+public class Player{
     private String name;
-    private long time;
-    private int live;
+    private int time;
+    private Integer live;
     private int i;
     private int j;
 
@@ -16,8 +17,15 @@ public class Player {
         this.time = 0;
         this.live = MAX_AMOUNT_LIVES;
     }
+    public Player(String name, int time) {
+        this.i = 1;
+        this.j = 1;
+        this.name = name;
+        this.time = time;
+        this.live = MAX_AMOUNT_LIVES;
+    }
 
-    public int getI() {
+        public int getI() {
         return i;
     }
 
@@ -31,5 +39,25 @@ public class Player {
 
     public void setJ(int j) {
         this.j = j;
+    }
+
+    public int getLive() {
+        return live;
+    }
+
+    public void setLive(int live) {
+        this.live = live;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public int getTime() {
+        return time;
     }
 }

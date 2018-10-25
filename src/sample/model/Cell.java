@@ -17,16 +17,22 @@ public class Cell {
             rectangle = new Rectangle(20,20,Color.GREY);
         }
         if(code == Entity.DESTRUCTIBLE_BLOCK.getCode()) {
-            rectangle = new Rectangle(20,20,Color.BROWN);
+            rectangle = new Rectangle(20,20,Color.ROSYBROWN);
         }
         if(code == Entity.BOMB.getCode()) {
             rectangle = new Rectangle(20,20,Color.BLACK);
         }
-        if(code == Entity.KEY.getCode()) {
-            rectangle = new Rectangle(20,20,Color.BROWN);
+        if(code == Entity.KEY_CLOSE.getCode()) {
+            rectangle = new Rectangle(20,20,Color.ROSYBROWN);
         }
         if(code == Entity.FIRE.getCode()) {
             rectangle = new Rectangle(20,20,Color.RED);
+        }
+        if(code == Entity.KEY_OPEN.getCode()) {
+            rectangle = new Rectangle(20, 20, Color.GOLD);
+        }
+        if(code == Entity.BOT.getCode()) {
+            rectangle = new Rectangle(20, 20, Color.PINK);
         }
     }
 

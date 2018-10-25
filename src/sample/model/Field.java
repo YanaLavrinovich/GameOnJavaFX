@@ -1,65 +1,62 @@
 package sample.model;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.scene.layout.*;
-import javafx.util.Duration;
+
+import sample.UserException;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Field {
     private int[][] field;
-    private GridPane pane;
+    private int keyI = 3;
+    private int keyJ = 3;
 
-    final static int HIGH = 20;
-    final static int WEIGHT = 20;
-
+    public final static int HIGH = 21;
+    public final static int WEIGHT = 21;
 
 
     public Field() {
-        pane = new GridPane();
         field = new int[HIGH][WEIGHT];
-        Timeline timeline = new Timeline(
-                new KeyFrame(
-                        Duration.seconds(1),
-                        ae -> {
-                            repaint();}
-                )
-        );
-        timeline.setCycleCount(-1);
-        timeline.play();
-    }
-
-    public GridPane getPane() {
-        return pane;
     }
 
     public int[][] getField() {
         return field;
     }
 
-    public void repaint() {
-        pane.getChildren().clear();
-        for (int i = 0; i < HIGH; i++) {
-            for (int j = 0; j < WEIGHT; j++) {
-                Cell cell = new Cell(field[j][i]);
-                pane.setGridLinesVisible(true);
-                pane.add(cell.getRectangle(), i, j);
-            }
+    public void addFirstLevel() throws UserException {
+        Path firstLevel = Paths.get("resource/firstLevel.txt");
+        List<String> level = new ArrayList<>();
+        try {
+            level = Files.lines(firstLevel).collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new UserException("The file wasn't found!", e.fillInStackTrace());
         }
+        field = moveToArray(level);
     }
 
-    public void addFirstLevel() {
-        for (int i = 0; i < HIGH; i++) {
-            for (int j = 0; j < WEIGHT; j++) {
-                if (i == 0 || i == HIGH - 1 || j == 0 || j == WEIGHT - 1) {
-                    field[j][i] = Entity.INDESTRUCTIBLE_BLOCK.getCode();
-                }
-                if (j == Entity.HERO.getCode() && i == Entity.HERO.getCode()) {
-                    field[j][i] = Entity.HERO.getCode();
-                }
-                if (i % 2 == 0 && j % 2 == 0) {
-                    field[j][i] = Entity.INDESTRUCTIBLE_BLOCK.getCode();
-                }
+    private int[][] moveToArray(List<String> level) {
+        int[][] result = new int[HIGH][WEIGHT];
+        int i = 0;
+        for (String current : level) {
+            String[] string = current.split("\\s+");
+            for (int j = 0; j < string.length; j++) {
+                result[i][j] = Integer.parseInt(string[j]);
             }
+            i++;
         }
+        return result;
+    }
+
+    public int getKeyI() {
+        return keyI;
+    }
+
+    public int getKeyJ() {
+        return keyJ;
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import sample.UserException;
 import sample.controller.Controller;
 
 
@@ -35,7 +36,7 @@ public class PlayerWindow {
         playerNameField = new TextField();
     }
 
-    public void createWindow() { //May be it is needed to create an abstract class. You should think about it!
+    public void createWindow() {
         textLabel.setFont(Font.font(20));
         playerNameField.setMinSize(40, 20);
         okButton.setMinSize(20, 20);
@@ -52,7 +53,11 @@ public class PlayerWindow {
 
         okButton.setOnAction(e -> {
             if (playerNameField.getText().matches(regexName)) {
-                //add to base with players
+                try {
+                    controller.startGameWorld(playerNameField.getText());
+                } catch (UserException e1) {
+                    e1.printStackTrace();
+                }
                 controller.showGameWindow();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You entered a wrong name!");
@@ -64,5 +69,10 @@ public class PlayerWindow {
 
     public void show() {
         primaryStage.show();
+    }
+
+    public void close() {
+        controller.writeToFile();
+        primaryStage.close();
     }
 }
